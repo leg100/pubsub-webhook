@@ -4,7 +4,7 @@
 
 Convert webhooks requests to PubSub messages.
 
-This is a Google Cloud Function that takes an incoming HTTP POST payload and forwards it to a Pub/Sub topic. That's it. It's particularly useful if you want to serve a single webhook on Google Cloud and have it trigger multiple subscribers, whether it be Cloud Functions or App Engine applications, or any subscribing to the topic.
+This is a Google Cloud Function that takes an incoming HTTP POST payload and forwards it to a Pub/Sub topic. That's it. It's particularly useful if you want to serve a single webhook on Google Cloud and have it trigger multiple subscribers, whether it be Cloud Functions or App Engine applications, or anything else subscribing to the topic.
 
 ![Diagram](pubsub-webhook.svg)
 
