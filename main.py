@@ -2,11 +2,23 @@ from google.cloud import pubsub
 import os
 
 
+def whitelist_req(req, ranges):
+    from ipaddress import ip_address, ip_network
+
+    for r in ranges.split(','):
+        if ip_address(req.remote_addr) in ip_network(r):
+            return True
+
+    return False
+
+
 def pubsub_webhook(req):
     if req.method != 'POST':
         return ('Method not allowed', 405)
 
-    # TODO: whitelist requests (e.g. based on source IP)
+    if 'IP_WHITELIST' in os.environ:
+        if not whitelist_req(req, os.environ['IP_WHITELIST']):
+            return ('Forbidden', 403)
 
     client = pubsub.PublisherClient()
 

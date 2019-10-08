@@ -19,6 +19,7 @@ Set some environment variables first:
 * `GOOGLE_CLOUD_PROJECT`: the project in which to deploy the function
 * `TOPIC_NAME`: the Pub/Sub topic to which to forward the POST payloads
 * `TOPIC_PROJECT`: (optional) the project hosting the Pub/Sub topic; the default is the same project as the function
+* `IP_WHITELIST`: (optional) comma delimited list of IP ranges from which the HTTP POST must originate, e.g. `1.2.3.4/32,1.2.3.5/24`; defaults to allowing all requests
 
 ### Create Topic
 
@@ -53,7 +54,7 @@ gcloud beta functions deploy webhook \
      --runtime python37 \
      --entry-point pubsub_webhook \
      --service-account webhook@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com \
-     --set-env-vars TOPIC_NAME=${TOPIC_NAME},TOPIC_PROJECT=${TOPIC_PROJECT} \
+     --set-env-vars TOPIC_NAME=${TOPIC_NAME},TOPIC_PROJECT=${TOPIC_PROJECT},IP_WHITELIST=${IP_WHITELIST} \
      --trigger-http \
      --allow-unauthenticated
 ```
